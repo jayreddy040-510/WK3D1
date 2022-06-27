@@ -127,7 +127,7 @@ end
 class Array
     def my_zip(*arrays)
 
-        self.map.with_index {|ele, i| arrays.inject(ele) { |acc, cur| acc + cur[i]}}    
+        self.map.with_index {|ele, i| arrays.inject([ele]) { |acc, cur| acc << cur[i]}}    
         
     end
 end
@@ -136,12 +136,35 @@ end
 
 
 
-a = [ 4, 5, 6 ]
-b = [ 7, 8, 9 ]
-[1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
-a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
-[1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
+# a = [ 4, 5, 6 ]
+#  b = [ 7, 8, 9 ]
+# p [1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+# p a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
+# p [1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
 
-c = [10, 11, 12]
-d = [13, 14, 15]
-[1, 2].my_zip(a, b, c, d)    # => [[1, 4, 7, 10, 13], [2, 5, 8, 11, 14]]
+# c = [10, 11, 12]
+# d = [13, 14, 15]
+# p [1, 2].my_zip(a, b, c, d)    # => [[1, 4, 7, 10, 13], [2, 5, 8, 11, 14]]
+
+=begin
+
+My Rotate
+Write a method my_rotate that returns a new array containing all the elements of the original array in a rotated order. By default, the array should rotate by one element. If a negative value is given, the array is rotated in the opposite direction.
+=end
+
+class Array
+    def my_rotate(num = 1)
+        num.times do
+            self.push(self.shift)
+        end
+        self
+    end
+
+end
+
+
+a = [ "a", "b", "c", "d" ]
+p a.my_rotate         #=> ["b", "c", "d", "a"]
+p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
+# p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
+p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
