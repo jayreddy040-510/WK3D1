@@ -154,17 +154,61 @@ Write a method my_rotate that returns a new array containing all the elements of
 
 class Array
     def my_rotate(num = 1)
-        num.times do
-            self.push(self.shift)
-        end
-        self
-    end
+        temp = self.clone
+        if num > 0
 
+            num.times do
+                temp.push(temp.shift)
+            end
+        else 
+            (-num).times do
+                temp.unshift(temp.pop)
+            end
+        end
+        temp
+    end
 end
 
 
 a = [ "a", "b", "c", "d" ]
-p a.my_rotate         #=> ["b", "c", "d", "a"]
-p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
+# p a.my_rotate         #=> ["b", "c", "d", "a"]
+# p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
 # p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
-p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
+# p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
+
+
+
+
+# My Join
+# my_join returns a single string containing all the elements of the array, separated by the given string separator. If no separator is given, an empty string is used.
+class Array
+    def my_join(sep="")
+        self.inject {|acc, cur| "#{acc}#{sep}#{cur}"}
+    end
+    
+    
+    
+end
+
+
+# a = [ "a", "b", "c", "d" ]
+# p a.my_join         # => "abcd"
+# p a.my_join("$")    # => "a$b$c$d"
+
+
+# My Reverse
+# Write a method that returns a new array containing all the elements of the original array in reverse order.
+class Array
+    def my_reverse
+
+        self.map.with_index {|ele, i| self[self.length - i - 1]}
+        
+    end
+    
+    
+end
+
+
+
+p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
+p [ 1 ].my_reverse               #=> [1]
